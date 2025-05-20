@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import connectDB from "./config/db.js";
@@ -21,6 +21,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
