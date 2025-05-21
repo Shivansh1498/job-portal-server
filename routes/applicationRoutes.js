@@ -13,12 +13,12 @@ import {
 const router = Router();
 
 // Only candidates can apply for jobs
-router.post("/:jobId/apply", protect, isCandidate, applyToJob);
+router.post("/:jobId", protect, isCandidate, applyToJob);
 
 // Only candidates can view their own applications
 router.get("/me", protect, isCandidate, getMyApplications);
 
 // Only recruiters can view applicants for a job
-router.get("/:jobId/applicants", protect, isRecruiter, getApplicationsForJob);
+router.get("/job/:jobId", protect, isRecruiter, getApplicationsForJob);
 
 export default router;

@@ -1,18 +1,20 @@
 import { Router } from "express";
 import {
   createJob,
-  getAllJobs,
+  deleteJob,
   getJobById,
+  getJobs,
+  updateJob,
 } from "../controllers/jobController.js";
 import { isRecruiter, protect } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-// Public
-router.get("/", getAllJobs);
-router.get("/:id", getJobById);
-
-// Private
-router.post("/", protect, isRecruiter, createJob);
+router.route("/").get(getJobs).post(protect, isRecruiter, createJob);
+router
+  .route("/:id")
+  .get(getJobById)
+  .put(protect, isRecruiter, updateJob)
+  .delete(protect, isRecruiter, deleteJob);
 
 export default router;
